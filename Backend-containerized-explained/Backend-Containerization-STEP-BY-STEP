@@ -1,14 +1,9 @@
 THIS IS HOW TO CONTAINERIZE APPLICATION STEP BY STEP
 
-<p align="center">
-  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-</p>
 
-<h1 align="center">STEP 1</h1>
-
-<p align="center">
-  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-</p>
+**************************************************
+*****************  **STEP 1**  *******************
+**************************************************
 
 rename application.properties to application.yml or yaml (both are correct)- file is found
 in src/main/resources
@@ -42,15 +37,9 @@ We are using environment variable formatting here example >>>>  ${SPRING_DATASOU
 docker.compose.yml will to draw data from application.yaml (old application.properties)so make sure you keep ${} format
 
 
-<p align="center">
-  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-</p>
-
-<h1 align="center">STEP 2</h1>
-
-<p align="center">
-  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
-</p>
+**************************************************
+*****************  **STEP 2**  *******************
+**************************************************
 create Dockerfile
 
 
@@ -118,16 +107,11 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
   # application using the JAR file.
 
 
- p align="center">
-   ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
- </p>
+ **************************************************
+ *****************  **STEP 3**  *******************
+ **************************************************
 
- <h1 align="center">STEP 1</h1>
-
- <p align="center">
-   ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
- </p>
-
+ DOCKER-COMPOSE.YML explainded  << again open this guide side by side with docker-compose.yml
 
  My-Notes/
  ├── .idea/
@@ -149,6 +133,61 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
  │   │   └── Dockerfile <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< STEP 2
  │   ├── Frontend-is-to-be-here/
  │   └── Backend-Containerization-STEP-BY-STEP/
- ├── docker-compose.yml <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< STEP 3
+ ├── docker-compose.yml <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< STEP 3 HERE WE ARE
  └── README.md
 
+
+  we create dockerfile and rename it to docker-compose.yml <<< this way we can use yml formatting again
+
+
+  version: '3.9'
+
+  services:
+    yoloapp:
+      build:
+        context: Backend-yolo-API
+      ports:
+        - "9099:8080"
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://yolodb:5435/yolodb
+        SPRING_DATASOURCE_USERNAME: yolouser
+        SPRING_DATASOURCE_PASSWORD: yolopassword
+        SPRING_JPA_HIBERNATE_DDL_AUTO: none
+        SPRING_JPA_SHOW_SQL: "true"
+        SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+      depends_on:
+        - yolodb
+
+    yolodb:
+      image: postgres:13-alpine
+      environment:
+        POSTGRES_DB: yolodb
+        POSTGRES_USER: yolouser
+        POSTGRES_PASSWORD: yolopassword
+      ports:
+        - "5435:5432"
+      volumes:
+        - yolodb_data:/var/lib/postgresql/data
+
+  volumes:
+    yolodb_data:
+
+
+
+This docker.compose.yml file defines a multi-container application with two services:
+
+Summary
+Version 3.9: Uses the Docker Compose file format version 3.9.
+Services:
+yoloapp:
+Build Context: Specifies the directory Backend-yolo-API for the Docker build context.
+Ports: Maps port 9099 on the host to port 8080 in the container.
+Environment Variables: Sets up Spring Boot environment variables for database connectivity and JPA configuration.
+depends_on: Ensures that the yolodb service is started before yoloapp.
+yolodb:
+Image: Uses the postgres:13-alpine image for the PostgreSQL database.
+Environment Variables: Configures the PostgreSQL database, user, and password.
+Ports: Maps port 5435 on the host to port 5432 in the container.
+Volumes: Uses the named volume yolodb_data to persist PostgreSQL data.
+Volumes:
+yolodb_data: Defines a named volume to persist PostgreSQL data.
