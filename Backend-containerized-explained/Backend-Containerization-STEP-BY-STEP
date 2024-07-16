@@ -34,6 +34,7 @@ docker.compose.yml will to draw data from application.yaml (old application.prop
 
 2 create Dockerfile
 
+Open this and Dockerfile side by side for better understanding
 
 #......................................................
 #....Step 1: (BUILDER STAGE) Builds the application....
