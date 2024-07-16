@@ -1,6 +1,16 @@
 THIS IS HOW TO CONTAINERIZE APPLICATION STEP BY STEP
 
-1 rename application.properties to application.yml or yaml (both are correct)- file is found
+<p align="center">
+  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+</p>
+
+<h1 align="center">STEP 1</h1>
+
+<p align="center">
+  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+</p>
+
+rename application.properties to application.yml or yaml (both are correct)- file is found
 in src/main/resources
  (now you can use yaml text formatting)
  (application.properties is the file where we used to spring jpa properties
@@ -32,7 +42,18 @@ We are using environment variable formatting here example >>>>  ${SPRING_DATASOU
 docker.compose.yml will to draw data from application.yaml (old application.properties)so make sure you keep ${} format
 
 
-2 create Dockerfile
+<p align="center">
+  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+</p>
+
+<h1 align="center">STEP 2</h1>
+
+<p align="center">
+  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+</p>
+create Dockerfile
+
+
 
 Open this and Dockerfile side by side for better understanding
 
@@ -95,3 +116,39 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
   #You copy the JAR file from the build stage into this new image.
   #You specify that when this container starts, it should run the Java
   # application using the JAR file.
+
+
+ p align="center">
+   ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+ </p>
+
+ <h1 align="center">STEP 1</h1>
+
+ <p align="center">
+   ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
+ </p>
+
+ 
+ My-Notes/
+ ├── .idea/
+ ├── Backend-containerized-explained/
+ │   ├── Backend-yolo-API/
+ │   │   ├── .gradle/
+ │   │   ├── gradle/
+ │   │   ├── src/
+ │   │   │   └── main/
+ │   │   │       ├── java/
+ │   │   │       │   └── backendyoloapi/
+ │   │   │       │       └── BackendYoloApiApplication.java
+ │   │   │       └── resources/
+ │   │   │           └── application.yml
+ │   │   ├── build.gradle
+ │   │   ├── gradlew
+ │   │   ├── gradlew.bat
+ │   │   ├── settings.gradle
+ │   │   └── Dockerfile
+ │   ├── Frontend-is-to-be-here/
+ │   └── Backend-Containerization-STEP-BY-STEP/
+ ├── docker-compose.yml
+ └── README.md
+
