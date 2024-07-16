@@ -1,10 +1,10 @@
-package backendwhateverapi.backendwhateverapi;
+package backendyoloapi.backendyoloapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BackendWhateverApiApplicationTests {
+class BackendYoloApiApplicationTests {
 
     @Test
     void contextLoads() {
