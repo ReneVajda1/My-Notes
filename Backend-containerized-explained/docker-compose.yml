@@ -3,11 +3,11 @@ version: '3.9'
 services:
   yoloapp:
     build:
-      context: Backend-yolo-API
+      context: .
     ports:
-      - "9099:8080"
+      - "9090:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://yolodb:5435/yolodb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://yolodb:5432/yolodb
       SPRING_DATASOURCE_USERNAME: yolouser
       SPRING_DATASOURCE_PASSWORD: yolopassword
       SPRING_JPA_HIBERNATE_DDL_AUTO: none
