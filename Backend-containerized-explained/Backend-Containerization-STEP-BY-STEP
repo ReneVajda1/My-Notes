@@ -128,7 +128,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
    ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦
  </p>
 
- 
+
  My-Notes/
  ├── .idea/
  ├── Backend-containerized-explained/
@@ -141,14 +141,14 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
  │   │   │       │   └── backendyoloapi/
  │   │   │       │       └── BackendYoloApiApplication.java
  │   │   │       └── resources/
- │   │   │           └── application.yml
+ │   │   │           └── application.yml  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< STEP 1
  │   │   ├── build.gradle
  │   │   ├── gradlew
  │   │   ├── gradlew.bat
  │   │   ├── settings.gradle
- │   │   └── Dockerfile
+ │   │   └── Dockerfile <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< STEP 2
  │   ├── Frontend-is-to-be-here/
  │   └── Backend-Containerization-STEP-BY-STEP/
- ├── docker-compose.yml
+ ├── docker-compose.yml <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< STEP 3
  └── README.md
 
