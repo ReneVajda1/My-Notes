@@ -30,3 +30,67 @@ now the file because its renamed to yml uses following formatting :
 
 We are using environment variable formatting here example >>>>  ${SPRING_DATASOURCE_URL} <<<< because this way
 docker.compose.yml will to draw data from application.yaml (old application.properties)so make sure you keep ${} format
+
+
+2 create Dockerfile
+
+
+#......................................................
+#....Step 1: (BUILDER STAGE) Builds the application....
+#......................................................
+# uses gradel image that has jdk21 and compile it with gradel
+FROM gradle:jdk21-alpine AS builder
+
+# Sets app to current workign directory (its where  u place DOCKERFILE)
+WORKDIR /app
+# and all commands below WORKDIR /app will be run directly
+
+COPY . .
+#copies all files from local project directory to the "/app" directory in the CONTAINER
+# because build process needs all project files
+
+RUN gradle bootJar
+# runs gradle command to build executable JAR file of springboot app
+# simply compiles your application into JAR file
+
+#......................................................
+#....Step 2: (RUNTIME STAGE) Create a runtime image....
+#......................................................
+
+RUN ls -la /app/build/libs
+# this lists the files in the /app/build/libs directory.
+# This is debugging step to verify JAR was created successfully
+
+FROM amazoncorretto:21
+# uses Amazon Corretto image that includes JDK 21
+# I use this because its lightweight JDK image suitable for running apps
+
+WORKDIR /app
+#yes we need this second time because this time its for Runtime stage
+
+COPY --from=builder /app/build/libs/*.jar app.jar
+# Copy the build jar = copies JAR file created in 1st Builders stage step1  to the
+# current working directory = this is compiled application that will runnnn
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
+# sets the entry point >> Sets the command to run the application using java -jar app.jar
+# why ? this step starts your springboot app when container is run
+
+
+
+# DESCRIPTION IN DETAILS
+
+# First Stage: Build the Application
+  #
+  #You use a Docker image that already has Gradle and JDK 21 installed.
+  #You copy all your project files into this Docker container.
+  #You run the Gradle build command to create the JAR file.
+  #You check to make sure the JAR file is created successfully.
+
+#Second Stage: Create a Runtime Environment
+  #
+  #You switch to a smaller Docker image that only includes the JDK 21, which
+  # is needed to run Java applications.
+  #You copy the JAR file from the build stage into this new image.
+  #You specify that when this container starts, it should run the Java
+  # application using the JAR file.
