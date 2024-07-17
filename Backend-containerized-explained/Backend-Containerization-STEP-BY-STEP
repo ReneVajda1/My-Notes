@@ -145,7 +145,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
    yoloapp:
      build:
        context: ./Backend-yolo-API     <<<<<<<<< check project structure this finds path to backend
-       dockerfile: ./Backend-yolo-API/Dockerfile  << this finds dockerfile if you mess up here = db starts but app wont
+       dockerfile: ./Backend-yolo-API/Dockerfile  OR dockerfile: Dockerfile << this finds dockerfile if you mess up here = db starts but app wont
      ports:
        - "9099:8080"
      environment:
@@ -191,3 +191,65 @@ Ports: Maps port 5435 on the host to port 5432 in the container.
 Volumes: Uses the named volume yolodb_data to persist PostgreSQL data.
 Volumes:
 yolodb_data: Defines a named volume to persist PostgreSQL data.
+
+
+
+ **************************************************
+ *****************  **STEP 4**  *******************
+ **************************************************
+
+
+Terminal commands / how to operate it
+
+(use this if you want to load up new changes made)
+
+docker-compose up --build:
+This command will forcefully rebuild the images for the services defined in your docker-compose.yml file before starting the containers.
+It is useful when you have made changes to the Dockerfile or dependencies that the images are based on and want to ensure that the latest changes are included.
+
+
+docker-compose up:
+This command will start the services defined in your docker-compose.yml file using the existing images.
+If the images are not present locally, Docker will pull them from the registry.
+It does not rebuild the images unless it detects changes in the Dockerfile or the image dependencies.
+Use docker-compose up --build when you want to ensure that any changes to your Dockerfile or dependencies are included
+ in the build, and docker-compose up for starting the services without rebuilding the images.
+
+
+this is guide from mark
+
+# Docker compose
+
+## Run the project
+
+```bash
+docker-compose up
+```
+
+## Stop the project
+
+```bash
+docker-compose down
+```
+
+### Run the database only
+
+```bash
+docker-compose up db # or docker-compose up -d db
+```
+
+
+### Run the backend only intelliJ
+
+Use the following configuration in IntelliJ; setup configuration with following environment variables:
+
+```bash
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/mydatabase
+SPRING_DATASOURCE_USERNAME=myuser
+SPRING_DATASOURCE_PASSWORD=mypassword
+SPRING_JPA_HIBERNATE_DDL_AUTO=none
+SPRING_JPA_SHOW_SQL=true
+```
+
+after that run the configuration. :rocket:
+
