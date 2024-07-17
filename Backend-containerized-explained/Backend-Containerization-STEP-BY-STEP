@@ -140,37 +140,37 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
   we create dockerfile and rename it to docker-compose.yml <<< this way we can use yml formatting again
 
 
-  version: '3.9'
+ version: '3.9'
+ services:
+   yoloapp:
+     build:
+       context: ./Backend-yolo-API     <<<<<<<<< check project structure this finds path to backend
+       dockerfile: ./Backend-yolo-API/Dockerfile  << this finds dockerfile if you mess up here = db starts but app wont
+     ports:
+       - "9099:8080"
+     environment:
+       SPRING_DATASOURCE_URL: jdbc:postgresql://yolodb:5435/yolodb
+       SPRING_DATASOURCE_USERNAME: yolouser
+       SPRING_DATASOURCE_PASSWORD: yolopassword
+       SPRING_JPA_HIBERNATE_DDL_AUTO: none
+       SPRING_JPA_SHOW_SQL: "true"
+       SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+     depends_on:
+       - yolodb
 
-  services:
-    yoloapp:
-      build:
-        context: Backend-yolo-API
-      ports:
-        - "9099:8080"
-      environment:
-        SPRING_DATASOURCE_URL: jdbc:postgresql://yolodb:5435/yolodb
-        SPRING_DATASOURCE_USERNAME: yolouser
-        SPRING_DATASOURCE_PASSWORD: yolopassword
-        SPRING_JPA_HIBERNATE_DDL_AUTO: none
-        SPRING_JPA_SHOW_SQL: "true"
-        SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
-      depends_on:
-        - yolodb
+   yolodb:
+     image: postgres:13-alpine
+     environment:
+       POSTGRES_DB: yolodb
+       POSTGRES_USER: yolouser
+       POSTGRES_PASSWORD: yolopassword
+     ports:
+       - "5435:5432"
+     volumes:
+       - yolodb_data:/var/lib/postgresql/data
 
-    yolodb:
-      image: postgres:13-alpine
-      environment:
-        POSTGRES_DB: yolodb
-        POSTGRES_USER: yolouser
-        POSTGRES_PASSWORD: yolopassword
-      ports:
-        - "5435:5432"
-      volumes:
-        - yolodb_data:/var/lib/postgresql/data
-
-  volumes:
-    yolodb_data:
+ volumes:
+   yolodb_data:
 
 
 
