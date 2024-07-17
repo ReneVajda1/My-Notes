@@ -2,7 +2,11 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
+      <module name="Backend-containerization-docker.main" target="21" />
+      <module name="Backend-containerization-docker.test" target="21" />
       <module name="Backend-whatever-API" target="21" />
+      <module name="Backend-whatever-API.main" target="21" />
+      <module name="Backend-whatever-API.test" target="21" />
     </bytecodeTargetLevel>
   </component>
 </project>

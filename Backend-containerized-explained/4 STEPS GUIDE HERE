@@ -33,8 +33,8 @@ now the file because its renamed to yml uses following formatting :
 .                                                            .
 ..............................................................
 
-We are using environment variable formatting here example >>>>  ${SPRING_DATASOURCE_URL} <<<< because this way
-docker.compose.yml will to draw data from application.yaml (old application.properties)so make sure you keep ${} format
+We are using environment variable formatting here example >>>>  ${SPRING_DATASOURCE_URL} <<<<
+so make sure you keep ${} format. Why? because we define everything in step3 (docker-compose.yml)
 
 
 **************************************************
